@@ -18,16 +18,23 @@ Ex02TrackerHit::~Ex02TrackerHit() {}
 Ex02TrackerHit::Ex02TrackerHit(const Ex02TrackerHit& right) : G4VHit() {
     trackID   = right.trackID;
     chamberNb = right.chamberNb;
+    strip     = right.strip;
     edep      = right.edep;
-    pos       = right.pos;
+    hitPos    = right.hitPos;
+    digiPos   = right.digiPos;
+    error     = right.error;
 }
 
 
 const Ex02TrackerHit& Ex02TrackerHit::operator=(const Ex02TrackerHit& right) {
     trackID   = right.trackID;
     chamberNb = right.chamberNb;
+    strip     = right.strip;
     edep      = right.edep;
-    pos       = right.pos;
+    hitPos    = right.hitPos;
+    digiPos   = right.digiPos;
+    error     = right.error;
+
     return *this;
 }
 
@@ -42,7 +49,7 @@ void Ex02TrackerHit::Draw() {
     G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
     if(pVVisManager)
     {
-        G4Circle circle(pos);
+        G4Circle circle(hitPos);
         circle.SetScreenSize(2.);
         circle.SetFillStyle(G4Circle::filled);
         G4Colour colour(1.,0.,0.);
@@ -55,9 +62,10 @@ void Ex02TrackerHit::Draw() {
 
 void Ex02TrackerHit::Print() {
 
-    G4cout << "  trackID: " << trackID << "  chamberNb: " << chamberNb
+    G4cout << "  trackID: " << trackID << "  chamberNb: " << chamberNb << " strip: " << strip
         << "  energy deposit: " << G4BestUnit(edep,"Energy")
-        << "  position: " << G4BestUnit(pos,"Length") << G4endl;
+        << "  hit position: " << G4BestUnit(hitPos,"Length") 
+        << "  digi position: " << G4BestUnit(digiPos,"Length") << G4endl;
 }
 
 

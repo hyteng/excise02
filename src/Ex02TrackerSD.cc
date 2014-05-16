@@ -28,7 +28,7 @@ void Ex02TrackerSD::Initialize(G4HCofThisEvent* HCE) {
 }
 
 
-G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep,G4TouchableHistory*) {
+G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep,G4TouchableHistory* ROhist) {
     G4double edep = aStep->GetTotalEnergyDeposit();
 
     if(edep != 1.*MeV) return false;

@@ -26,21 +26,32 @@ class Ex02TrackerHit : public G4VHit {
     public:
 
         void SetTrackID  (G4int track)      { trackID = track; };
-        void SetChamberNb(G4int chamb)      { chamberNb = chamb; };  
+        void SetChamberNb(G4int chamb)      { chamberNb = chamb; };
+        void SetStrip    (G4int st)         {strip = st};
         void SetEdep     (G4double de)      { edep = de; };
-        void SetPos      (G4ThreeVector xyz){ pos = xyz; };
+        void SetHitPos   (G4ThreeVector x)  { hitPos = x; };
+        void SetHitPos   (G4ThreeVector y)  { digiPos = y; };
+        void SetError   (G4ThreeVector z)  { error = z; };
 
-        G4int GetTrackID()    { return trackID; };
-        G4int GetChamberNb()  { return chamberNb; };
-        G4double GetEdep()    { return edep; };      
-        G4ThreeVector GetPos(){ return pos; };
+        G4int GetTrackID()          { return trackID; };
+        G4int GetChamberNb()        { return chamberNb; };
+        G4int GetStrip()            { return strip; };
+        G4double GetEdep()          { return edep; };      
+        G4ThreeVector GetHitPos()   { return hitPos; };
+        G4ThreeVector GetDigiPos()  { return digiPos; };
+        G4ThreeVector GetError()    { return error; };
+        
 
     private:
 
         G4int         trackID;
         G4int         chamberNb;
+        G4int         strip;
         G4double      edep;
-        G4ThreeVector pos;
+        G4ThreeVector hitPos;
+        G4ThreeVector digiPos;
+        G4ThreeVector error;
+        
 };
 
 typedef G4THitsCollection<Ex02TrackerHit> Ex02TrackerHitsCollection;

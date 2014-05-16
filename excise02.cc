@@ -54,8 +54,8 @@ int main(int argc, char** argv) {
     
     // User Action
     
-    //G4UserRunAction* theRunAction = new Ex02RunAction;
-    //theRunManager->SetUserAction(theRunAction);
+    G4UserRunAction* theRunAction = new Ex02RunAction;
+    theRunManager->SetUserAction(theRunAction);
 
     G4UserEventAction* theEventAction = new Ex02EventAction;
     theRunManager->SetUserAction(theEventAction);

@@ -82,11 +82,15 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
 
     //------------------------------ SD 
     G4SDManager* SDman = G4SDManager::GetSDMpointer();
-    G4String trackerSDname = "Ex02/TrackerSD";
-    Ex02TrackerSD* aTrackerSD = new Ex02TrackerSD(trackerSDname);
-    SDman->AddNewDetector(aTrackerSD);
-    trackerLayer_log->SetSensitiveDetector(aTrackerSD);
+    G4String trackerSDName = "Ex02/TrackerSD";
+    Ex02TrackerSD* trackerSD = new Ex02TrackerSD(trackerSDName);
+    SDman->AddNewDetector(trackerSD);
+    trackerLayer_log->SetSensitiveDetector(trackerSD);
 
+    G4String ROgeometryName = "TrackerROGeometry";
+    G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName);
+    trackerRO->BuildROGeometry();
+    trackerSD->SetROgeometry(trackerRO);
     //------------------ Parameterisation Models --------------------------
 
     G4Region* trackerRegion = new G4Region("tracker_region");
