@@ -24,6 +24,7 @@
 #include "G4hPairProduction.hh"
 
 #include "G4ionIonisation.hh"
+#include "G4ios.hh"
 
 // for parameterisation
 #include "G4FastSimulationManagerProcess.hh"
@@ -74,8 +75,8 @@ void Ex02PhysicsList::ConstructProcess() {
     // Define transportation process
 
     AddTransportation();
-    AddParameterisation();
-    //ConstructEM();
+    //AddParameterisation();
+    ConstructEM();
 }
 
 void Ex02PhysicsList::ConstructEM() {
@@ -141,12 +142,13 @@ void Ex02PhysicsList::AddParameterisation() {
 
     G4FastSimulationManagerProcess* fastSimProcess_Mu = new G4FastSimulationManagerProcess("Mu");
 
+    G4cout << "AddParameterisation for muon" << G4endl;
     theParticleIterator->reset();
     while((*theParticleIterator)()) {
         G4ParticleDefinition* particle = theParticleIterator->value();
         G4ProcessManager* pmanager = particle->GetProcessManager();
         if (particle->GetParticleName() == "mu+" || particle->GetParticleName() == "mu-")
-            pmanager->AddProcess(fastSimProcess_Mu);
+            pmanager->AddDiscreteProcess(fastSimProcess_Mu);
     }
 }
 

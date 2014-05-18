@@ -1,17 +1,34 @@
-#include "ExN04CalorimeterROGeometry.hh"
+#include "Ex02TrackerROGeometry.hh"
+#include "Ex02DummySD.hh"
 
-ExN04CalorimeterROGeometry::ExN04CalorimeterROGeometry() : G4VReadOutGeometry() {
+#include "G4Material.hh"
+#include "G4Box.hh"
+#include "G4Tubs.hh"
+#include "G4LogicalVolume.hh"
+#include "G4ThreeVector.hh"
+#include "G4PVPlacement.hh"
+#include "G4SDManager.hh"
+#include "globals.hh"
+#include "G4SystemOfUnits.hh"
+
+#include "G4VisAttributes.hh"
+#include "G4Colour.hh"
+
+#include "G4ios.hh"
+
+
+Ex02TrackerROGeometry::Ex02TrackerROGeometry() : G4VReadOutGeometry() {
 }
 
-ExN04CalorimeterROGeometry::ExN04CalorimeterROGeometry(G4String aString) : G4VReadOutGeometry(aString), dummyMat(0) {
+Ex02TrackerROGeometry::Ex02TrackerROGeometry(G4String aString) : G4VReadOutGeometry(aString), dummyMat(0) {
 }
 
-ExN04CalorimeterROGeometry::~ExN04CalorimeterROGeometry() {
+Ex02TrackerROGeometry::~Ex02TrackerROGeometry() {
 }
 
-G4VPhysicalVolume* ExN04CalorimeterROGeometry::Build() {
+G4VPhysicalVolume* Ex02TrackerROGeometry::Build() {
 
-    G4Material* dummyMat  = new G4Material(name="dummyMat", 1., 1.*g/mole, 1.*g/cm3);
+    dummyMat  = new G4Material(name="dummyMat", 1., 1.*g/mole, 1.*g/cm3);
 
     G4double expHall_x = 2.5*m;
     G4double expHall_y = 1.0*m;
@@ -50,14 +67,17 @@ G4VPhysicalVolume* ExN04CalorimeterROGeometry::Build() {
     G4double strip_x = 1.*mm;
     G4double strip_y = 100.*cm;
     G4double strip_z = 1.5*cm;
-    G4Box* strip= new G4Box("strip_box", strip_x, strip_y, strip_z);
+    G4Box* strip_box = new G4Box("strip_box", strip_x, strip_y, strip_z);
     G4LogicalVolume* strip_log = new G4LogicalVolume(strip_box, dummyMat, "strip_log", 0, 0, 0);
-    for(G4int j = 0; j < 40; i++)  {
+    for(G4int j = 0; j < 40; j++)  {
         G4double stripPos_x = 0.*mm;
         G4double stripPos_y = 0.*mm;
         G4double stripPos_z = -tracker_z+2.5*cm+j*5.0*cm;
         G4VPhysicalVolume* strip_phys = new G4PVPlacement(0, G4ThreeVector(stripPos_x, stripPos_y, stripPos_z), strip_log, "strip", trackerLayer_log, false, j);
     }
+
+    Ex02DummySD * dummySensi = new Ex02DummySD;
+    strip_log->SetSensitiveDetector(dummySensi);
 
     return experimentalHall_phys;
 }

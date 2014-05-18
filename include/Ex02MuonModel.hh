@@ -12,6 +12,9 @@
 #define Ex02MuonModel_h
 
 #include "G4VFastSimulationModel.hh"
+#include "G4Step.hh"
+#include "G4TouchableHandle.hh"
+
 
 class Ex02MuonModel : public G4VFastSimulationModel {
 
@@ -28,6 +31,10 @@ class Ex02MuonModel : public G4VFastSimulationModel {
         void DoIt(const G4FastTrack&, G4FastStep&); 
 
     private:
+        G4Step  *fFakeStep;
+        G4TouchableHandle   fTouchableHandle;
+        G4Navigator *fpNavigator;
+        G4bool  fNaviSetup;
 };
 
 #endif

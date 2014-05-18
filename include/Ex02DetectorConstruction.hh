@@ -18,6 +18,7 @@
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
+class G4Element;
 
 class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
     public:
@@ -38,6 +39,11 @@ class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
         G4VPhysicalVolume* trackerLayer_phys;
 
         Ex02MagneticField* fpMagField;
+
+        G4Element* H;
+        G4Element* O;
+        G4Element* C;
+        G4Element* N;
 };
 
 #endif

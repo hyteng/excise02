@@ -15,15 +15,15 @@
 #include "Ex02DetectorConstruction.hh"
 #include "Ex02PhysicsList.hh"
 #include "Ex02PrimaryGeneratorAction.hh"
-//#include "Ex02RunAction.hh"
-//#include "Ex02EventAction.hh"
+#include "Ex02RunAction.hh"
+#include "Ex02EventAction.hh"
 //#include "Ex02StackingAction.hh"
 //#include "Ex02TrackingAction.hh"
-//#include "Ex02SteppingAction.hh"
+#include "Ex02SteppingAction.hh"
+#include "Ex02SteppingVerbose.hh"
 
 //#include "G4GlobalFastSimulationManager.hh"
 
-#define G4VIS_USE 0
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -33,11 +33,17 @@
 #include "G4UIExecutive.hh"
 #endif
 
+std::ofstream outFile;
+
 int main(int argc, char** argv) {
 
     // Seed the random number generator
     G4long mySeed = 123456;
     CLHEP::HepRandom::setTheSeed(mySeed);
+
+    // User Verbose output class
+    G4VSteppingVerbose* verbosity = new Ex02SteppingVerbose;
+    G4VSteppingVerbose::SetInstance(verbosity);
 
     // Run manager
     G4RunManager* theRunManager = new G4RunManager;
@@ -66,8 +72,8 @@ int main(int argc, char** argv) {
     //G4UserTrackingAction* theTrackingAction = new Ex02TrackingAction;
     //theRunManager->SetUserAction(theTrackingAction);
 
-    //G4UserSteppingAction* theSteppingAction = new Ex02SteppingAction;
-    //theRunManager->SetUserAction(theSteppingAction);
+    G4UserSteppingAction* theSteppingAction = new Ex02SteppingAction;
+    theRunManager->SetUserAction(theSteppingAction);
 
     theRunManager->Initialize();
 
@@ -76,9 +82,6 @@ int main(int argc, char** argv) {
     theVisManager->Initialize();
 #endif
 
-    G4int EventNumber = 10;
-    theRunManager->BeamOn(EventNumber);
-    
     // User Interface
     G4UImanager* theUIManager = G4UImanager::GetUIpointer();
 
@@ -97,13 +100,17 @@ int main(int argc, char** argv) {
             delete theUI;
         #endif
     }
-    
+
+    G4int EventNumber = 1;
+    theRunManager->BeamOn(EventNumber);
+
 #ifdef G4VIS_USE
     delete theVisManager;   
 #endif 
 
     //Job termination
     delete theRunManager;
+    delete verbosity;
 
     return 0;
 }

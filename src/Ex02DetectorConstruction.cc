@@ -2,6 +2,7 @@
 #include "Ex02MagneticField.hh"
 #include "Ex02TrackerSD.hh"
 #include "Ex02MuonModel.hh"
+#include "Ex02TrackerROGeometry.hh"
 
 #include "G4Material.hh"
 #include "G4Box.hh"
@@ -13,6 +14,7 @@
 #include "globals.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4ProductionCuts.hh"
+#include "G4UserLimits.hh"
 
 #include "G4VisAttributes.hh"
 #include "G4Colour.hh"
@@ -34,13 +36,24 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
 
     G4double a;  // atomic mass
     G4double z;  // atomic number
+    G4double nel;
     G4double density;
 
+    H = new G4Element("Hydrogen", "H", z=1., a=  1.01*g/mole);
+    C = new G4Element("Carbon",   "C", z=6., a= 12.01*g/mole);
+    N = new G4Element("Nitrogen", "N", z=7., a= 14.01*g/mole);
+    O = new G4Element("Oxygen",   "O", z=8., a= 16.00*g/mole);
+
     G4Material* Ar = new G4Material("ArgonGas", z=18., a=39.95*g/mole, density=1.782*mg/cm3);
-
     G4Material* Al = new G4Material("Aluminum", z=13., a=26.98*g/mole, density=2.7*g/cm3);
-
     G4Material* Pb = new G4Material("Lead", z=82., a=207.19*g/mole, density=11.35*g/cm3);
+    G4Material* Air = new G4Material("Air", density= 1.29*mg/cm3, nel=2);
+    Air->AddElement(N, 70.*perCent);
+    Air->AddElement(O, 30.*perCent);
+    G4Material* Silicon = new G4Material("Silicon", z=14., a= 28.09*g/mole, density= 2.33*g/cm3);
+    G4Material* Scinti = new G4Material("Scintillator", density= 1.032*g/cm3, nel=2);
+    Scinti->AddElement(C, 9);
+    Scinti->AddElement(H, 10);
 
     //------------------------------------------------------ volumes
 
@@ -60,7 +73,7 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4double block_y = 100.0*cm;
     G4double block_z = 100.0*cm;
     G4Box* trackerBlock_box = new G4Box("trackerBlock_box", block_x, block_y, block_z);
-    trackerBlock_log = new G4LogicalVolume(trackerBlock_box, Pb, "trackerBlock_log", 0, 0, 0);
+    trackerBlock_log = new G4LogicalVolume(trackerBlock_box, Al, "trackerBlock_log", 0, 0, 0);
     G4double blockPos_x = 2.0*m;
     G4double blockPos_y = 0.0*m;
     G4double blockPos_z = 0.0*m;
@@ -72,7 +85,9 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4double tracker_y = 100.*cm;
     G4double tracker_z = 100.*cm;
     G4Box* trackerLayer_box = new G4Box("trackerLayer_box", tracker_x, tracker_y, tracker_z);
-    trackerLayer_log = new G4LogicalVolume(trackerLayer_box, Al, "trackerLayer_log", 0, 0, 0);
+    trackerLayer_log = new G4LogicalVolume(trackerLayer_box, Scinti, "trackerLayer_log", 0, 0, 0);
+    double maxStep = 0.1*tracker_x;
+    trackerLayer_log->SetUserLimits(new G4UserLimits(maxStep));
     for(G4int i = 0; i < 5; i++)  {
         G4double trackerPos_x = (i-2)*20.*cm;
         G4double trackerPos_y = 0.0*m;
@@ -90,7 +105,7 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4String ROgeometryName = "TrackerROGeometry";
     G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName);
     trackerRO->BuildROGeometry();
-    trackerSD->SetROgeometry(trackerRO);
+    //trackerSD->SetROgeometry(trackerRO);
     //------------------ Parameterisation Models --------------------------
 
     G4Region* trackerRegion = new G4Region("tracker_region");

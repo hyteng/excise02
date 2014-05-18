@@ -11,4 +11,7 @@ class Ex02TrackerROGeometry : public G4VReadOutGeometry {
         ~Ex02TrackerROGeometry();
     private:
         G4VPhysicalVolume* Build();
-}
+        G4Material* dummyMat;
+};
+
+#endif

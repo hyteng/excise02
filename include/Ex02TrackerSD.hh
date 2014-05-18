@@ -7,6 +7,7 @@
 
 class G4Step;
 class G4HCofThisEvent;
+class G4TouchableHistory;
 
 class Ex02TrackerSD : public G4VSensitiveDetector {
   public:
@@ -19,6 +20,7 @@ class Ex02TrackerSD : public G4VSensitiveDetector {
 
   private:
       Ex02TrackerHitsCollection* trackerCollection;
+      G4int tracker[5][40];
 
 };
 

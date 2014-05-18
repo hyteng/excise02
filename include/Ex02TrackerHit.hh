@@ -27,10 +27,11 @@ class Ex02TrackerHit : public G4VHit {
 
         void SetTrackID  (G4int track)      { trackID = track; };
         void SetChamberNb(G4int chamb)      { chamberNb = chamb; };
-        void SetStrip    (G4int st)         {strip = st};
+        void SetStrip    (G4int st)         { strip = st; };
         void SetEdep     (G4double de)      { edep = de; };
+        void AddEdep     (G4double de)      { edep += de; };
         void SetHitPos   (G4ThreeVector x)  { hitPos = x; };
-        void SetHitPos   (G4ThreeVector y)  { digiPos = y; };
+        void SetDigiPos   (G4ThreeVector y)  { digiPos = y; };
         void SetError   (G4ThreeVector z)  { error = z; };
 
         G4int GetTrackID()          { return trackID; };

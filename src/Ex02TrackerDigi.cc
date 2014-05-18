@@ -1,40 +1,43 @@
-#include "Ex02TrackDigi.hh"
+#include "Ex02TrackerDigi.hh"
 
-G4Allocator<Ex02TrackDigi> Ex02TrackDigiAllocator;
+G4Allocator<Ex02TrackerDigi> Ex02TrackerDigiAllocator;
 
-Ex02TrackDigi::Ex02TrackDigi() {
+Ex02TrackerDigi::Ex02TrackerDigi() {
     DetectorNumber = 0;
     StripNumber=0;
-    GlobalPosition(0., 0., 0.);
-    GlobalError(0., 0., 0.);
+    GlobalPosition = G4ThreeVector(0., 0., 0.);
+    GlobalError = G4ThreeVector(0., 0., 0.);
+    GlobalSimPosition = G4ThreeVector(0., 0., 0.);
 }
 
-Ex02TrackDigi::Ex02TrackDigi(const Ex02TrackDigi& right) : G4VDigi() {
+Ex02TrackerDigi::Ex02TrackerDigi(const Ex02TrackerDigi& right) : G4VDigi() {
     DetectorNumber = right.DetectorNumber;
     StripNumber = right.StripNumber;
     GlobalPosition = right.GlobalPosition;
     GlobalError = right.GlobalError;
+    GlobalSimPosition = right.GlobalSimPosition;
 }
 
-Ex02TrackDigi::~Ex02TrackDigi() {
+Ex02TrackerDigi::~Ex02TrackerDigi() {
 }
 
-const Ex02TrackDigi& Ex02TrackDigi::operator=(const Ex02TrackDigi& right) {
+const Ex02TrackerDigi& Ex02TrackerDigi::operator=(const Ex02TrackerDigi& right) {
 
     DetectorNumber = right.DetectorNumber;
     StripNumber = right.StripNumber;
     GlobalPosition = right.GlobalPosition;
     GlobalError = right.GlobalError;
+    GlobalSimPosition = right.GlobalSimPosition;
 
     return *this;
 }
 
-int Ex02TrackDigi::operator==(const Ex02TrackDigi& right) const {
-    return ((DetectorNumber==right.DetectorNumber)&&(StripNumber==right.StripNumber)&&(GlobalPosition==right.GlobalPosition)&&(GlobalError==right.GlobalError));
+int Ex02TrackerDigi::operator==(const Ex02TrackerDigi& right) const {
+    return ((DetectorNumber==right.DetectorNumber)&&(StripNumber==right.StripNumber)&&(GlobalPosition==right.GlobalPosition)&&(GlobalError==right.GlobalError)&&(GlobalSimPosition==right.GlobalSimPosition));
 }
 
-void Ex02TrackDigi::Draw() {
+void Ex02TrackerDigi::Draw() {
 }
 
-void Ex02TrackDigi::Print() {
+void Ex02TrackerDigi::Print() {
 }
