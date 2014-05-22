@@ -30,7 +30,7 @@ G4VPhysicalVolume* Ex02TrackerROGeometry::Build() {
 
     dummyMat  = new G4Material(name="dummyMat", 1., 1.*g/mole, 1.*g/cm3);
 
-    G4double expHall_x = 2.5*m;
+    G4double expHall_x = 1.5*m;
     G4double expHall_y = 1.0*m;
     G4double expHall_z = 1.0*m;
     G4Box* experimentalHall_box = new G4Box("expHall_box", expHall_x, expHall_y, expHall_z);
@@ -44,7 +44,7 @@ G4VPhysicalVolume* Ex02TrackerROGeometry::Build() {
     G4double block_z = 100.0*cm;
     G4Box* trackerBlock_box = new G4Box("trackerBlock_box", block_x, block_y, block_z);
     G4LogicalVolume* trackerBlock_log = new G4LogicalVolume(trackerBlock_box, dummyMat, "trackerBlock_log", 0, 0, 0);
-    G4double blockPos_x = 2.0*m;
+    G4double blockPos_x = 1.0*m;
     G4double blockPos_y = 0.0*m;
     G4double blockPos_z = 0.0*m;
     G4VPhysicalVolume* trackerBlock_phys = new G4PVPlacement(0, G4ThreeVector(blockPos_x, blockPos_y, blockPos_z), trackerBlock_log, "trackerBlock", experimentalHall_log, false, 0);

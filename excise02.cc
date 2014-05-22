@@ -28,6 +28,7 @@
 
 //#include "G4GlobalFastSimulationManager.hh"
 
+#define G4VIS_USE 0
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -96,6 +97,9 @@ int main(int argc, char** argv) {
     theVisManager->Initialize();
 #endif
 
+    G4int EventNumber = 10;
+    theRunManager->BeamOn(EventNumber);
+
     // User Interface
     G4UImanager* theUIManager = G4UImanager::GetUIpointer();
 
@@ -114,9 +118,6 @@ int main(int argc, char** argv) {
             delete theUI;
         #endif
     }
-
-    G4int EventNumber = 10;
-    theRunManager->BeamOn(EventNumber);
 
     #ifdef G4STORE_DATA
     outFile.close();
