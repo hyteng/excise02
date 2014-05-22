@@ -22,7 +22,7 @@ extern std::ofstream outFile;
 Ex02EventAction::Ex02EventAction() : trackerCollID(-1), drawFlag("all") {
 
     G4DigiManager * fDM = G4DigiManager::GetDMpointer();
-    Ex02TrackerDigitizer * myDM = new Ex02TrackerDigitizer( "Ex02TrackerDigitizer" );
+    Ex02TrackerDigitizer * myDM = new Ex02TrackerDigitizer("Ex02TrackerDigitizer");
     fDM->AddNewModule(myDM);
 }
 
@@ -36,8 +36,9 @@ void Ex02EventAction::BeginOfEventAction(const G4Event* evt) {
     G4cout << "Event: " << evtNb << G4endl; 
     G4SDManager * SDman = G4SDManager::GetSDMpointer();
 
-    if (trackerCollID==-1)
+    if(trackerCollID==-1)
         trackerCollID = SDman->GetCollectionID("trackerCollection");
+
 }
 
 void Ex02EventAction::EndOfEventAction(const G4Event* evt) {
@@ -57,14 +58,28 @@ void Ex02EventAction::EndOfEventAction(const G4Event* evt) {
             
         }
         Ex02TrackerDigitizer * myDM = (Ex02TrackerDigitizer*)fDM->FindDigitizerModule("Ex02TrackerDigitizer");
+        myDM->SetEventNumber(event_id);
         myDM->Digitize();
         G4int myDigiCollID = fDM->GetDigiCollectionID("DigitsCollection");
         Ex02TrackerDigitsCollection *DC = (Ex02TrackerDigitsCollection*)fDM->GetDigiCollection(myDigiCollID);
         if(DC) {
             G4int n_digi = DC->entries();
             for (G4int i=0;i<n_digi;i++) {
+                G4int DetId = (*DC)[i]->GetDetector();
+                outFile << std::setw(7) << DetId << " ";
                 G4int NStrip = (*DC)[i]->GetStrip();
-                outFile << std::setw(7) << NStrip << G4endl;
+                outFile << std::setw(7) << NStrip << " ";
+                G4ThreeVector DigiPos = (*DC)[i]->GetPosition();
+                outFile << std::setw(7) << DigiPos.x() << " ";
+                outFile << std::setw(7) << DigiPos.y() << " ";
+                outFile << std::setw(7) << DigiPos.z() << " ";
+                G4double Pt = (*DC)[i]->GetPt();
+                outFile << std::setw(7) << Pt << " ";
+                G4ThreeVector SimPos = (*DC)[i]->GetSimPosition();
+                outFile << std::setw(7) << SimPos.x() << " ";
+                outFile << std::setw(7) << SimPos.y() << " ";
+                outFile << std::setw(7) << SimPos.z() << " ";
+                outFile << "\n";
             }
         }
     }

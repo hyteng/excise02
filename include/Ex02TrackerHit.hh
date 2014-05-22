@@ -29,15 +29,17 @@ class Ex02TrackerHit : public G4VHit {
         void SetChamberNb(G4int chamb)      { chamberNb = chamb; };
         void SetStrip    (G4int st)         { strip = st; };
         void SetEdep     (G4double de)      { edep = de; };
+        void SetPt       (G4double p)       { pt = p; };
         void AddEdep     (G4double de)      { edep += de; };
         void SetHitPos   (G4ThreeVector x)  { hitPos = x; };
-        void SetDigiPos   (G4ThreeVector y)  { digiPos = y; };
-        void SetError   (G4ThreeVector z)  { error = z; };
+        void SetDigiPos   (G4ThreeVector y) { digiPos = y; };
+        void SetError   (G4ThreeVector z)   { error = z; };
 
         G4int GetTrackID()          { return trackID; };
         G4int GetChamberNb()        { return chamberNb; };
         G4int GetStrip()            { return strip; };
-        G4double GetEdep()          { return edep; };      
+        G4double GetEdep()          { return edep; };
+        G4double GetPt()            { return pt; };
         G4ThreeVector GetHitPos()   { return hitPos; };
         G4ThreeVector GetDigiPos()  { return digiPos; };
         G4ThreeVector GetError()    { return error; };
@@ -49,6 +51,7 @@ class Ex02TrackerHit : public G4VHit {
         G4int         chamberNb;
         G4int         strip;
         G4double      edep;
+        G4double      pt;  // since we get particle gun emit the partile vertical to B, pt=P
         G4ThreeVector hitPos;
         G4ThreeVector digiPos;
         G4ThreeVector error;

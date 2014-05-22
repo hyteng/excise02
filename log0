@@ -1,0 +1,625 @@
+
+*************************************************************
+ Geant4 version Name: geant4-10-00-patch-01 [MT]   (28-February-2014)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ProcCuts108
+      issued by : G4ProductionCuts::SetProductionCuts 
+Given vector size is inconsitent 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  G4HepRep (HepRepXML)
+  G4HepRepFile (HepRepFile)
+  OpenGLImmediateQt (OGLI, OGLIQt)
+  OpenGLImmediateX (OGLIX, OGLI_FALLBACK, OGLIQt_FALLBACK)
+  OpenGLStoredQt (OGL, OGLS, OGLSQt)
+  OpenGLStoredX (OGLSX, OGL_FALLBACK, OGLS_FALLBACK, OGLSQt_FALLBACK)
+  RayTracer (RayTracer)
+  VRML1FILE (VRML1FILE)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+Available UI session types: [ Qt, GAG, tcsh, csh ]
+
+
+Region <DefaultRegionForTheWorld> --  -- appears in <expHall> world volume
+ This region is in the mass world.
+ Root logical volume(s) : expHall_log 
+ Pointers : G4VUserRegionInformation[0], G4UserLimits[0], G4FastSimulationManager[0], G4UserSteppingAction[0]
+ Materials : ArgonGas Aluminum 
+ Production cuts :   gamma 1 mm      e- 1 mm      e+ 1 mm  proton 1 mm 
+
+Region <DefaultRegionForParallelWorld> --  -- is not associated to any world.
+ Root logical volume(s) : 
+ Pointers : G4VUserRegionInformation[0], G4UserLimits[0], G4FastSimulationManager[0], G4UserSteppingAction[0]
+ Materials : 
+ Production cuts :   gamma 1 mm      e- 1 mm      e+ 1 mm  proton 1 mm 
+
+Region <tracker_region> --  -- appears in <expHall> world volume
+ This region is in the mass world.
+ Root logical volume(s) : trackerLayer_log 
+ Pointers : G4VUserRegionInformation[0], G4UserLimits[0], G4FastSimulationManager[0x11c1600], G4UserSteppingAction[0]
+ Materials : Scintillator 
+ Production cuts :   gamma 1 mm      e- 1 mm      e+ 1 mm  proton 0 fm 
+
+========= Table of registered couples ==============================
+
+Index : 0     used in the geometry : Yes
+ Material : ArgonGas
+ Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
+ Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 1     used in the geometry : Yes
+ Material : Aluminum
+ Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 1 mm 
+ Energy thresholds :  gamma  6.90362919343 keV    e-  598.34507324039 keV    e+  570.85041624066 keV proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 2     used in the geometry : Yes
+ Material : Scintillator
+ Range cuts        :  gamma  1 mm     e-  1 mm     e+  1 mm  proton 0 fm 
+ Energy thresholds :  gamma  2.4036723012396 keV    e-  356.63860186526 keV    e+  344.85451939795 keV proton -1 MeV
+ Region(s) which use this couple : 
+    tracker_region
+
+====================================================================
+
+### Run 1 starts.
+/vis/scene/notifyHandlers
+ERROR: G4VisManager::IsValidView (): the current scene handler
+  "scene-handler-0" has no viewers.  Do /vis/viewer/create.
+WARNING: Problem setting viewer - please report circumstances.
+WARNING: No viewers for this scene handler - please create one.
+SD Initialize: 0
+Event: 0
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 1
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 2
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 3
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 4
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 5
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 6
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 7
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 8
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+SD Initialize: 0
+Event: 9
+
+*********************************************************************************************************
+* G4Track Information:   Particle = mu-,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#      X         Y         Z        KineE    dEStep   StepLeng  TrakLeng    Volume     Process
+    0   -2.5 m       0 fm      0 fm    100 GeV     0 eV      0 fm      0 fm      expHall    initStep
+    1    1.5 m       0 fm    -24 cm    100 GeV     0 eV   4.01 m    4.01 m       expHall  Transportation
+    2   1.59 m       0 fm  -25.1 cm    100 GeV     0 eV   9.07 cm    4.1 m    trackerBlock  Transportation
+    3   1.61 m       0 fm  -25.4 cm    100 GeV     0 eV   2.02 cm   4.12 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 0
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1600,0,-975), localError: (1,1000,15)
+    4   1.79 m       0 fm  -27.7 cm    100 GeV     0 eV   18.1 cm    4.3 m    trackerBlock  Transportation
+    5   1.81 m       0 fm  -27.9 cm    100 GeV     0 eV   2.02 cm   4.32 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 1
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (1800,0,-975), localError: (1,1000,15)
+    6   1.99 m       0 fm  -30.3 cm    100 GeV     0 eV   18.2 cm    4.5 m    trackerBlock  Transportation
+    7   2.01 m       0 fm  -30.6 cm    100 GeV     0 eV   2.02 cm   4.52 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 2
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2000,0,-975), localError: (1,1000,15)
+    8   2.19 m       0 fm  -33.1 cm    100 GeV     0 eV   18.2 cm   4.71 m    trackerBlock  Transportation
+    9   2.21 m       0 fm  -33.4 cm    100 GeV     0 eV   2.02 cm   4.73 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 3
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2200,0,-975), localError: (1,1000,15)
+   10   2.39 m       0 fm    -36 cm    100 GeV     0 eV   18.2 cm   4.91 m    trackerBlock  Transportation
+   11   2.41 m       0 fm  -36.3 cm    100 GeV     0 eV   2.02 cm   4.93 m    trackerLayer  Transportation
+edep: 0
+ROVolumeName: trackerLayer, CopyNo: 4
+stripPVNumber: 0, StripLocalPosition: (0,0,-975), GlobalDigiPosition: (2400,0,-975), localError: (1,1000,15)
+   12    2.5 m       0 fm  -37.6 cm    100 GeV     0 eV    9.1 cm   5.02 m    OutOfWorld  Transportation
+
+-------->Hits Collection: in this event they are 5 hits in the tracker chambers: 
+  trackID: 1  chamberNb: 0 strip: 0  energy deposit: 1 MeV  hit position: 1.59 0 -0.25143009615908 m    digi position: 1.6 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 1 strip: 0  energy deposit: 1 MeV  hit position: 1.79 0 -0.2767263331129 m    digi position: 1.8 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 2 strip: 0  energy deposit: 1 MeV  hit position: 1.99 0 -0.3032507734481 m    digi position: 2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 3 strip: 0  energy deposit: 1 MeV  hit position: 2.19 0 -0.33100637331877 m    digi position: 2.2 0 -0.975 m    error: 0.001 1 0.015 m  
+  trackID: 1  chamberNb: 4 strip: 0  energy deposit: 1 MeV  hit position: 2.39 0 -0.35999623625864 m    digi position: 2.4 0 -0.975 m    error: 0.001 1 0.015 m  
+Number of tracker hits in this event =  5
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+Run terminated.
+Run Summary
+  Number of events processed : 10
+  User=0.01s Real=0s Sys=0s
+End of Run 
+File Tracks_1.dat
+/vis/viewer/update
+ERROR: G4VisCommandsViewerUpdate::SetNewValue: no current viewer.
+ERROR: G4VisManager::IsValidView(): Current view is not valid.
+ERROR: G4VisManager::PrintInvalidPointers:
+  Graphics system is OpenGLStoredQt but:
+  Null viewer pointer. Use "/vis/viewer/create".
+Graphics systems deleted.
+Visualization Manager deleting...
+G4 kernel has come to Quit state.
+UserDetectorConstruction deleted.
+UserPhysicsList deleted.
+UserRunAction deleted.
+UserPrimaryGenerator deleted.
+RunManager is deleting RunManagerKernel.
+G4SDManager deleted.
+EventManager deleted.
+Units table cleared.
+================== Deleting memory pools ===================
+Number of memory pools allocated: 19; of which, static: 2
+Dynamic pools deleted: 17 / Total memory freed: 0.025 Mb
+============================================================
+G4Allocator objects are deleted.
+UImanager deleted.
+StateManager deleted.
+RunManagerKernel is deleted. Good bye :)

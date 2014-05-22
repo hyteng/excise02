@@ -20,6 +20,7 @@ Ex02TrackerHit::Ex02TrackerHit(const Ex02TrackerHit& right) : G4VHit() {
     chamberNb = right.chamberNb;
     strip     = right.strip;
     edep      = right.edep;
+    pt        = right.pt;
     hitPos    = right.hitPos;
     digiPos   = right.digiPos;
     error     = right.error;
@@ -31,6 +32,7 @@ const Ex02TrackerHit& Ex02TrackerHit::operator=(const Ex02TrackerHit& right) {
     chamberNb = right.chamberNb;
     strip     = right.strip;
     edep      = right.edep;
+    pt        = right.pt;
     hitPos    = right.hitPos;
     digiPos   = right.digiPos;
     error     = right.error;
@@ -65,7 +67,8 @@ void Ex02TrackerHit::Print() {
     G4cout << "  trackID: " << trackID << "  chamberNb: " << chamberNb << " strip: " << strip
         << "  energy deposit: " << G4BestUnit(edep,"Energy")
         << "  hit position: " << G4BestUnit(hitPos,"Length") 
-        << "  digi position: " << G4BestUnit(digiPos,"Length") << G4endl;
+        << "  digi position: " << G4BestUnit(digiPos,"Length") 
+        << "  error: " << G4BestUnit(error,"Length") << G4endl;
 }
 
 

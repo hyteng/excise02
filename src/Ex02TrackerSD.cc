@@ -25,7 +25,7 @@ void Ex02TrackerSD::Initialize(G4HCofThisEvent* HCE) {
         HCID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]); 
     }
     HCE->AddHitsCollection(HCID, trackerCollection);
-    
+
     G4cout << "SD Initialize: " << HCID << G4endl;
     for(int i=0;i<5;i++)
         for(int j=0;j<40;j++)
@@ -33,13 +33,13 @@ void Ex02TrackerSD::Initialize(G4HCofThisEvent* HCE) {
 }
 
 
-G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep,G4TouchableHistory* ROhist) {
+G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
 
     G4double edep = aStep->GetTotalEnergyDeposit();
     G4cout << "edep: " << edep << G4endl;
     if(edep < 0.1*MeV) 
         edep = 1.0*MeV;
-        //return false;
+    //return false;
 
     G4VPhysicalVolume* ROPV = ROhist->GetVolume();
     G4String ROPVName = ROPV->GetName();
@@ -61,26 +61,31 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep,G4TouchableHistory* ROhist) {
             }
         }
 
-        if(tracker[ROPVNumber][stripPVNumber] == -1) {
-            Ex02TrackerHit* newHit = new Ex02TrackerHit();
-            newHit->SetTrackID(aStep->GetTrack()->GetTrackID());
-            newHit->SetChamberNb(ROPVNumber);
-            newHit->SetEdep(edep);
-            newHit->SetHitPos(GlobalHitPosition);
-            G4ThreeVector StripLocalPosition = TrakerLayerLV->GetDaughter(stripPVNumber)->GetTranslation();
-            G4ThreeVector GlobalDigiPosition = ROhist->GetHistory()->GetTopTransform().Inverse().TransformPoint(StripLocalPosition);
-            newHit->SetDigiPos(GlobalDigiPosition);
-            G4Box *trackerLayer_box = (G4Box*)(TrakerLayerLV->GetDaughter(stripPVNumber)->GetLogicalVolume()->GetSolid());
-            G4ThreeVector localError(trackerLayer_box->GetXHalfLength(), trackerLayer_box->GetYHalfLength(), trackerLayer_box->GetZHalfLength());
-            G4ThreeVector globalError = ROhist->GetHistory()->GetTopTransform().Inverse().TransformPoint(localError);
-            newHit->SetError(localError);
-            tracker[ROPVNumber][stripPVNumber] = trackerCollection->insert(newHit) - 1;
-            G4cout << "stripPVNumber: " << stripPVNumber << ", StripLocalPosition: " << StripLocalPosition << ", GlobalDigiPosition: " << GlobalDigiPosition << ", localError: " << localError << G4endl;
+        if(stripPVNumber != -1) {
+            if(tracker[ROPVNumber][stripPVNumber] == -1) {
+                Ex02TrackerHit* newHit = new Ex02TrackerHit();
+                newHit->SetTrackID(aStep->GetTrack()->GetTrackID());
+                newHit->SetChamberNb(ROPVNumber);
+                newHit->SetStrip(stripPVNumber);
+                newHit->SetEdep(edep);
+                newHit->SetHitPos(GlobalHitPosition);
+                G4ThreeVector StripLocalPosition = TrakerLayerLV->GetDaughter(stripPVNumber)->GetTranslation();
+                G4ThreeVector GlobalDigiPosition = ROhist->GetHistory()->GetTopTransform().Inverse().TransformPoint(StripLocalPosition);
+                newHit->SetDigiPos(GlobalDigiPosition);
+                G4Box *trackerLayer_box = (G4Box*)(TrakerLayerLV->GetDaughter(stripPVNumber)->GetLogicalVolume()->GetSolid());
+                G4ThreeVector localError(trackerLayer_box->GetXHalfLength(), trackerLayer_box->GetYHalfLength(), trackerLayer_box->GetZHalfLength());
+                G4ThreeVector globalError = ROhist->GetHistory()->GetTopTransform().Inverse().TransformPoint(localError);
+                newHit->SetError(localError);
+
+                G4ThreeVector P = aStep->GetTrack()->GetMomentum();
+                newHit->SetPt(P.mag());
+                tracker[ROPVNumber][stripPVNumber] = trackerCollection->insert(newHit) - 1;
+                G4cout << "stripPVNumber: " << stripPVNumber << ", StripLocalPosition: " << StripLocalPosition << ", GlobalDigiPosition: " << GlobalDigiPosition << ", localError: " << localError << G4endl;
+            }
+            else
+                (*trackerCollection)[tracker[ROPVNumber][stripPVNumber]]->AddEdep(edep);
+            return true;
         }
-        else
-            (*trackerCollection)[tracker[ROPVNumber][stripPVNumber]]->AddEdep(edep);
-        
-        return true;   
     }
     return false;
 }
@@ -97,7 +102,7 @@ void Ex02TrackerSD::EndOfEvent(G4HCofThisEvent* HCE) {
     if(HCID<0)
         HCID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
     HCE->AddHitsCollection(HCID, trackerCollection); 
-    
+
     for(int i=0;i<5;i++)
         for(int j=0;j<40;j++)
             tracker[i][j] = -1;

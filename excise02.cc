@@ -37,6 +37,8 @@
 #include "G4UIExecutive.hh"
 #endif
 
+#define G4STORE_DATA 1
+
 std::ofstream outFile;
 
 int main(int argc, char** argv) {
@@ -44,6 +46,12 @@ int main(int argc, char** argv) {
     // Seed the random number generator
     G4long mySeed = 123456;
     CLHEP::HepRandom::setTheSeed(mySeed);
+
+    std::string FileName = "rundata.txt";
+    #ifdef G4STORE_DATA
+    outFile.open(FileName.c_str());
+    #endif
+
 
     // User Verbose output class
     G4VSteppingVerbose* verbosity = new Ex02SteppingVerbose;
@@ -110,9 +118,13 @@ int main(int argc, char** argv) {
     G4int EventNumber = 10;
     theRunManager->BeamOn(EventNumber);
 
-#ifdef G4VIS_USE
+    #ifdef G4STORE_DATA
+    outFile.close();
+    #endif
+
+    #ifdef G4VIS_USE
     delete theVisManager;   
-#endif 
+    #endif 
 
     //Job termination
     delete verbosity;
