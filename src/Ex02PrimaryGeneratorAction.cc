@@ -29,7 +29,7 @@ void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
     G4int i = anEvent->GetEventID()%5;
     G4ThreeVector v0(1.0,0.0,0.0);
-    double angle = CLHEP::RandFlat::shoot(-0.3, 0.3);
+    double angle = CLHEP::RandFlat::shoot(-0.25, 0.25);
     //angle = 0.;
     G4ThreeVector v = v0.rotateY(angle);
     G4cout << "angle: " << angle << ", v: " << v << G4endl;
