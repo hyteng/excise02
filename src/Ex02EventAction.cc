@@ -65,6 +65,10 @@ void Ex02EventAction::EndOfEventAction(const G4Event* evt) {
         if(DC) {
             G4int n_digi = DC->entries();
             for (G4int i=0;i<n_digi;i++) {
+                G4int RunNumber = (*DC)[i]->GetRun();
+                outFile << std::setw(7) << RunNumber << " ";
+                G4int EventNumber = (*DC)[i]->GetEvent();
+                outFile << std::setw(7) << EventNumber << " ";
                 G4int DetId = (*DC)[i]->GetDetector();
                 outFile << std::setw(7) << DetId << " ";
                 G4int NStrip = (*DC)[i]->GetStrip();
