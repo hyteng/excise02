@@ -12,6 +12,7 @@
 #define Ex02PhysicsList_h 1
 
 #include "G4VUserPhysicsList.hh"
+
 #include "globals.hh"
 
 class Ex02PhysicsList: public G4VUserPhysicsList {
@@ -24,6 +25,7 @@ class Ex02PhysicsList: public G4VUserPhysicsList {
         void ConstructParticle();
         void ConstructProcess();
         void SetCuts(); 
+        void AddStepMax();
 
     private:
         void ConstructLeptons();

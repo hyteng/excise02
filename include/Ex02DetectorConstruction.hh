@@ -14,10 +14,12 @@
 #include "Ex02MagneticField.hh"
 
 #include "G4VUserDetectorConstruction.hh"
+
 #include "globals.hh"
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
+class G4UserLimits;
 class G4Element;
 
 class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
@@ -37,6 +39,8 @@ class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
         G4VPhysicalVolume* experimentalHall_phys;
         G4VPhysicalVolume* trackerBlock_phys;
         G4VPhysicalVolume* trackerLayer_phys;
+
+        G4UserLimits* fStepLimit;
 
         Ex02MagneticField* fpMagField;
 

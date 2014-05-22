@@ -77,7 +77,7 @@ G4VPhysicalVolume* Ex02TrackerROGeometry::Build() {
     }
 
     Ex02DummySD * dummySensi = new Ex02DummySD;
-    strip_log->SetSensitiveDetector(dummySensi);
+    trackerLayer_log->SetSensitiveDetector(dummySensi);
 
     return experimentalHall_phys;
 }

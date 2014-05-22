@@ -14,6 +14,8 @@
 
 #include "Ex02DetectorConstruction.hh"
 #include "Ex02PhysicsList.hh"
+//#include "G4VModularPhysicsList.hh"
+#include "QGSP_BERT.hh"
 #include "Ex02PrimaryGeneratorAction.hh"
 #include "Ex02RunAction.hh"
 #include "Ex02EventAction.hh"
@@ -21,6 +23,8 @@
 //#include "Ex02TrackingAction.hh"
 #include "Ex02SteppingAction.hh"
 #include "Ex02SteppingVerbose.hh"
+
+#include "G4StepLimiterPhysics.hh"
 
 //#include "G4GlobalFastSimulationManager.hh"
 
@@ -52,7 +56,9 @@ int main(int argc, char** argv) {
     G4VUserDetectorConstruction* theDetector = new Ex02DetectorConstruction;
     theRunManager->SetUserInitialization(theDetector);
 
+    //G4VUserPhysicsList* thePhysicsList = new QGSP_BERT();
     G4VUserPhysicsList* thePhysicsList = new Ex02PhysicsList;
+    //thePhysicsList->RegisterPhysics(new G4StepLimiterPhysics());
     theRunManager->SetUserInitialization(thePhysicsList);
 
     G4VUserPrimaryGeneratorAction* theGenAction = new Ex02PrimaryGeneratorAction;
@@ -101,7 +107,7 @@ int main(int argc, char** argv) {
         #endif
     }
 
-    G4int EventNumber = 1;
+    G4int EventNumber = 10;
     theRunManager->BeamOn(EventNumber);
 
 #ifdef G4VIS_USE
@@ -109,8 +115,8 @@ int main(int argc, char** argv) {
 #endif 
 
     //Job termination
-    delete theRunManager;
     delete verbosity;
+    delete theRunManager;
 
     return 0;
 }

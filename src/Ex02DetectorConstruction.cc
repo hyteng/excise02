@@ -28,6 +28,7 @@ Ex02DetectorConstruction::Ex02DetectorConstruction() : experimentalHall_log(0), 
 
 Ex02DetectorConstruction::~Ex02DetectorConstruction() {
     delete fpMagField;
+    delete fStepLimit;
 }
 
 G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
@@ -87,7 +88,9 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4Box* trackerLayer_box = new G4Box("trackerLayer_box", tracker_x, tracker_y, tracker_z);
     trackerLayer_log = new G4LogicalVolume(trackerLayer_box, Scinti, "trackerLayer_log", 0, 0, 0);
     double maxStep = 0.1*tracker_x;
-    trackerLayer_log->SetUserLimits(new G4UserLimits(maxStep));
+    fStepLimit = new G4UserLimits(maxStep);
+    trackerLayer_log->SetUserLimits(fStepLimit);
+    
     for(G4int i = 0; i < 5; i++)  {
         G4double trackerPos_x = (i-2)*20.*cm;
         G4double trackerPos_y = 0.0*m;
@@ -105,16 +108,16 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4String ROgeometryName = "TrackerROGeometry";
     G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName);
     trackerRO->BuildROGeometry();
-    //trackerSD->SetROgeometry(trackerRO);
+    trackerSD->SetROgeometry(trackerRO);
     //------------------ Parameterisation Models --------------------------
-
+    
     G4Region* trackerRegion = new G4Region("tracker_region");
     trackerRegion->AddRootLogicalVolume(trackerLayer_log);
     std::vector<double> cuts; cuts.push_back(1.0*mm);cuts.push_back(1.0*mm);cuts.push_back(1.0*mm);
     trackerRegion->SetProductionCuts(new G4ProductionCuts());
     trackerRegion->GetProductionCuts()->SetProductionCuts(cuts);
     new Ex02MuonModel("MuonModel", trackerRegion); 
-
+    
 
     //------------------------------ Visualisaion
     G4VisAttributes* BoxVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));

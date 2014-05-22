@@ -51,24 +51,38 @@ void Ex02MuonModel::DoIt(const G4FastTrack& fastTrack, G4FastStep& fastStep) {
     G4String DetectorName = fastTrack.GetEnvelopePhysicalVolume()->GetName();
     int DetectotCopyNumber = fastTrack.GetEnvelopePhysicalVolume()->GetCopyNo();
     G4TouchableHandle Touch0 = fastTrack.GetPrimaryTrack()->GetTouchableHandle();
-    G4StepPoint* Point0 = fastTrack.GetPrimaryTrack()->GetStep()->GetPreStepPoint();
     G4cout << "DetectorName: " << DetectorName << ", DetectotCopyNumber: " << DetectotCopyNumber << G4endl;
-    if(DetectorName== "trackerLayer" && Point0->GetStepStatus() == fGeomBoundary) {
+
+    G4StepPoint* globalPoint0 = fastTrack.GetPrimaryTrack()->GetStep()->GetPreStepPoint();
+    G4ThreeVector globalPos0 = fastTrack.GetPrimaryTrack()->GetPosition();
+    G4ThreeVector localPos0 = fastTrack.GetPrimaryTrackLocalPosition();
+    G4cout << "PreStep: " << globalPoint0->GetPosition() << ". PrimaryTrack: globalPos0: " << globalPos0 << ", localPos0: " << localPos0 << G4endl;
+
+    if(DetectorName== "trackerLayer" && globalPoint0->GetStepStatus() == fGeomBoundary) {
         fastStep.ProposeTotalEnergyDeposited(1.*MeV);
         G4cout << "EnergyDeposited 1Mev" << G4endl;
     }
-    double distance = fastTrack.GetEnvelopeSolid()->DistanceToOut(fastTrack.GetPrimaryTrackLocalPosition(), fastTrack.GetPrimaryTrackLocalDirection());
-    G4ThreeVector position = fastTrack.GetPrimaryTrackLocalPosition() + distance*fastTrack.GetPrimaryTrackLocalDirection();
-    fastStep.ProposePrimaryTrackFinalPosition(position);
 
+    double distance = fastTrack.GetEnvelopeSolid()->DistanceToOut(localPos0, fastTrack.GetPrimaryTrackLocalDirection());
+    G4ThreeVector localPos1 = localPos0 + distance*fastTrack.GetPrimaryTrackLocalDirection();
+    G4ThreeVector localPos2 = localPos0 + distance*0.2*fastTrack.GetPrimaryTrackLocalDirection();
+    G4ThreeVector globalPos1 = globalPos0 + distance*fastTrack.GetPrimaryTrack()->GetMomentumDirection();
+    G4ThreeVector globalPos2 = globalPos0 + distance*0.2*fastTrack.GetPrimaryTrack()->GetMomentumDirection();
+    G4cout << "DistanceToOut: " << distance << ". localPos1: " << localPos1 << ". localPos2: " << localPos2 << ". globalPos1: " << globalPos1 << ". globalPos2: " << globalPos2 << G4endl;
+
+    fastStep.ProposePrimaryTrackFinalPosition(localPos1);
+    fastStep.ProposePrimaryTrackPathLength(distance);
+    
     if(!fNaviSetup) {
         fpNavigator->SetWorldVolume(G4TransportationManager::GetTransportationManager()->GetNavigatorForTracking()->GetWorldVolume());
-        fpNavigator->LocateGlobalPointAndUpdateTouchableHandle(Point0->GetPosition(), G4ThreeVector(0.,0.,0.), fTouchableHandle, false);
+        fpNavigator->LocateGlobalPointAndUpdateTouchableHandle(globalPos2, G4ThreeVector(0.,0.,0.), fTouchableHandle, false);
         fNaviSetup = true;
     }
     else {
-        fpNavigator->LocateGlobalPointAndUpdateTouchableHandle(Point0->GetPosition(), G4ThreeVector(0.,0.,0.), fTouchableHandle);
+        fpNavigator->LocateGlobalPointAndUpdateTouchableHandle(globalPos2, G4ThreeVector(0.,0.,0.), fTouchableHandle);
     }
+    //fFakeStep->SetPreStepPoint(globalPoint0);
+    //fFakeStep->GetPostStepPoint()->SetPosition(globalPos1);
     fFakeStep->GetPreStepPoint()->SetTouchableHandle(fTouchableHandle);
     fFakeStep->SetTotalEnergyDeposit(1.*MeV);
 
@@ -81,4 +95,5 @@ void Ex02MuonModel::DoIt(const G4FastTrack& fastTrack, G4FastStep& fastStep) {
         if(pSensitive != 0)
             pSensitive->Hit(fFakeStep);
     }
+   
 }

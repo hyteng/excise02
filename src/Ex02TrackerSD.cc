@@ -37,8 +37,10 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep,G4TouchableHistory* ROhist) {
 
     G4double edep = aStep->GetTotalEnergyDeposit();
     G4cout << "edep: " << edep << G4endl;
-    if(edep != 1.*MeV) return false;
-    
+    if(edep < 0.1*MeV) 
+        edep = 1.0*MeV;
+        //return false;
+
     G4VPhysicalVolume* ROPV = ROhist->GetVolume();
     G4String ROPVName = ROPV->GetName();
     G4int ROPVNumber = ROPV->GetCopyNo();

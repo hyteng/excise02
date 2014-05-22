@@ -24,10 +24,16 @@
 #include "G4hPairProduction.hh"
 
 #include "G4ionIonisation.hh"
-#include "G4ios.hh"
+
+// for StepLimiter
+#include "G4StepLimiter.hh"
+#include "G4UserSpecialCuts.hh"
 
 // for parameterisation
 #include "G4FastSimulationManagerProcess.hh"
+
+// for G4cout
+#include "G4ios.hh" 
 
 Ex02PhysicsList::Ex02PhysicsList() {
 }
@@ -75,8 +81,9 @@ void Ex02PhysicsList::ConstructProcess() {
     // Define transportation process
 
     AddTransportation();
+    //AddStepMax();
     //AddParameterisation();
-    ConstructEM();
+    //ConstructEM();
 }
 
 void Ex02PhysicsList::ConstructEM() {
@@ -148,7 +155,9 @@ void Ex02PhysicsList::AddParameterisation() {
         G4ParticleDefinition* particle = theParticleIterator->value();
         G4ProcessManager* pmanager = particle->GetProcessManager();
         if (particle->GetParticleName() == "mu+" || particle->GetParticleName() == "mu-")
-            pmanager->AddDiscreteProcess(fastSimProcess_Mu);
+            pmanager->AddProcess(fastSimProcess_Mu);
+            //pmanager->SetProcessOrdering(fastSimProcess_Mu, idxAlongStep, 1);
+            pmanager->SetProcessOrdering(fastSimProcess_Mu, idxPostStep);
     }
 }
 
@@ -163,4 +172,23 @@ void Ex02PhysicsList::SetCuts() {
     // Retrieve verbose level
     SetVerboseLevel(temp);  
 }
+
+void Ex02PhysicsList::AddStepMax()
+{
+  // Step limitation seen as a process
+  G4StepLimiter* stepLimiter = new G4StepLimiter();
+  ////G4UserSpecialCuts* userCuts = new G4UserSpecialCuts();
+  
+  theParticleIterator->reset();
+  while((*theParticleIterator)()) {
+      G4ParticleDefinition* particle = theParticleIterator->value();
+      G4ProcessManager* pmanager = particle->GetProcessManager();
+
+      if(particle->GetPDGCharge() != 0.0) {
+	  pmanager ->AddDiscreteProcess(stepLimiter);
+	  ////pmanager ->AddDiscreteProcess(userCuts);
+      }
+  }
+}
+
 
