@@ -30,6 +30,9 @@ class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
     public:
         G4VPhysicalVolume* Construct();
 
+        inline void SetROStripNumber(G4int n) {StripN = n;};
+        inline G4int GetROStripNumber() {return StripN;};
+
     private:
         void SetMagField(G4double);
 
@@ -48,6 +51,8 @@ class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
         G4Element* O;
         G4Element* C;
         G4Element* N;
+        
+        G4int StripN;
 };
 
 #endif

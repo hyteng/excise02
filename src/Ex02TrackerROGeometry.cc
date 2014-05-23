@@ -1,4 +1,5 @@
 #include "Ex02TrackerROGeometry.hh"
+#include "Ex02StripParameterisation.hh"
 #include "Ex02DummySD.hh"
 
 #include "G4Material.hh"
@@ -10,20 +11,26 @@
 #include "G4SDManager.hh"
 #include "globals.hh"
 #include "G4SystemOfUnits.hh"
-
+#include "G4PVParameterised.hh"
+#include "G4GeometryManager.hh"
 #include "G4VisAttributes.hh"
 #include "G4Colour.hh"
 
 #include "G4ios.hh"
 
 
-Ex02TrackerROGeometry::Ex02TrackerROGeometry() : G4VReadOutGeometry() {
+Ex02TrackerROGeometry::Ex02TrackerROGeometry(G4int n) : G4VReadOutGeometry(), dummyMat(0), fCheckOverlaps(false), NbOfStrips(n) {
 }
 
-Ex02TrackerROGeometry::Ex02TrackerROGeometry(G4String aString) : G4VReadOutGeometry(aString), dummyMat(0) {
+Ex02TrackerROGeometry::Ex02TrackerROGeometry(G4String aString, G4int n) : G4VReadOutGeometry(aString), dummyMat(0), fCheckOverlaps(false), NbOfStrips(n) {
 }
 
 Ex02TrackerROGeometry::~Ex02TrackerROGeometry() {
+}
+
+void Ex02TrackerROGeometry::SetStripNumber(G4int n) {
+    NbOfStrips = n;
+    G4cout << "TrackerRO set Strips: " << NbOfStrips << G4endl;
 }
 
 G4VPhysicalVolume* Ex02TrackerROGeometry::Build() {
@@ -64,17 +71,29 @@ G4VPhysicalVolume* Ex02TrackerROGeometry::Build() {
     }
 
     //------------------------------ Strips
-    G4double strip_x = 1.*mm;
+    G4double strip_x = 0.5*mm;
     G4double strip_y = 100.*cm;
-    G4double strip_z = 1.5*cm;
+    G4double strip_z = tracker_z/NbOfStrips;
     G4Box* strip_box = new G4Box("strip_box", strip_x, strip_y, strip_z);
     G4LogicalVolume* strip_log = new G4LogicalVolume(strip_box, dummyMat, "strip_log", 0, 0, 0);
-    for(G4int j = 0; j < 40; j++)  {
+    
+    for(G4int j = 0; j < NbOfStrips; j++)  {
         G4double stripPos_x = 0.*mm;
         G4double stripPos_y = 0.*mm;
-        G4double stripPos_z = -tracker_z+2.5*cm+j*5.0*cm;
+        G4double stripPos_z = -tracker_z+j*strip_z*2.0+strip_z;
         G4VPhysicalVolume* strip_phys = new G4PVPlacement(0, G4ThreeVector(stripPos_x, stripPos_y, stripPos_z), strip_log, "strip", trackerLayer_log, false, j);
     }
+    /*
+    if(NbOfStrips <= 0) {
+        G4cout << "NoStrips < 0 " << G4endl;
+        return experimentalHall_phys;
+    }
+    G4cout << "NoStrips: " << NbOfStrips << G4endl;
+    G4VPVParameterisation* stripParam = new Ex02StripParameterisation(NbOfStrips, tracker_x, tracker_y, tracker_z);
+    G4cout << "NoStrips: " << NbOfStrips << G4endl;
+    new G4PVParameterised("strip_log", strip_log, trackerLayer_log, kUndefined, NbOfStrips, stripParam, true);
+    */
+    G4cout << "NoStrips: " << trackerLayer_log->GetNoDaughters() << G4endl;
 
     Ex02DummySD * dummySensi = new Ex02DummySD;
     trackerLayer_log->SetSensitiveDetector(dummySensi);

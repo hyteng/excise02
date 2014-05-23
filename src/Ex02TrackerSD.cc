@@ -44,7 +44,7 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
     G4VPhysicalVolume* ROPV = ROhist->GetVolume();
     G4String ROPVName = ROPV->GetName();
     G4int ROPVNumber = ROPV->GetCopyNo();
-    G4cout << "ROVolumeName: " << ROPVName << ", CopyNo: " << ROPVNumber << G4endl;
+    G4cout << "ROVolumeName: " << ROPVName << ", CopyNo: " << ROPVNumber << ". Strips: " << ROhist->GetVolume()->GetLogicalVolume()->GetNoDaughters() << G4endl;
     if(ROPVName == "trackerLayer") {
         G4ThreeVector GlobalHitPosition = aStep->GetPreStepPoint()->GetPosition();
         G4ThreeVector LocalHitPosition = ROhist->GetHistory()->GetTopTransform().TransformPoint(GlobalHitPosition);

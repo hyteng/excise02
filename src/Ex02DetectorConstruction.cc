@@ -106,7 +106,7 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     trackerLayer_log->SetSensitiveDetector(trackerSD);
 
     G4String ROgeometryName = "TrackerROGeometry";
-    G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName);
+    G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName, StripN);
     trackerRO->BuildROGeometry();
     trackerSD->SetROgeometry(trackerRO);
     //------------------ Parameterisation Models --------------------------

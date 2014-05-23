@@ -62,7 +62,9 @@ int main(int argc, char** argv) {
     G4RunManager* theRunManager = new G4RunManager;
 
     // UserInitialization class - mandatory
-    G4VUserDetectorConstruction* theDetector = new Ex02DetectorConstruction;
+    //G4VUserDetectorConstruction* theDetector = new Ex02DetectorConstruction;
+    Ex02DetectorConstruction* theDetector = new Ex02DetectorConstruction;
+    theDetector->SetROStripNumber(20);
     theRunManager->SetUserInitialization(theDetector);
 
     //G4VUserPhysicsList* thePhysicsList = new QGSP_BERT();
@@ -92,10 +94,10 @@ int main(int argc, char** argv) {
 
     theRunManager->Initialize();
 
-#ifdef G4VIS_USE
+    #ifdef G4VIS_USE
     G4VisManager* theVisManager = new G4VisExecutive;
     theVisManager->Initialize();
-#endif
+    #endif
 
     G4int EventNumber = 10;
     theRunManager->BeamOn(EventNumber);
