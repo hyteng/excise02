@@ -27,10 +27,10 @@ Ex02PrimaryGeneratorAction::~Ex02PrimaryGeneratorAction() {
 
 void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
-    G4int i = anEvent->GetEventID()%10;
+    G4int i = anEvent->GetEventID()%5;
     G4ThreeVector v0(1.0,0.0,0.0);
     double angle = CLHEP::RandFlat::shoot(-0.25, 0.25);
-    //angle = 0.;
+    angle = 0.25;
     G4ThreeVector v = v0.rotateY(angle);
     G4cout << "angle: " << angle << ", v: " << v << G4endl;
     double P;
@@ -48,7 +48,7 @@ void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
         case 4:
             P = 50.0;
     }
-    P = 50.0;
+    //P = 50.0;
     particleGun->SetParticleEnergy(P*GeV);
     particleGun->SetParticleMomentumDirection(v);
     particleGun->GeneratePrimaryVertex(anEvent);

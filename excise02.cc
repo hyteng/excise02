@@ -99,8 +99,8 @@ int main(int argc, char** argv) {
     theVisManager->Initialize();
     #endif
 
-    G4int EventNumber = 10;
-    theRunManager->BeamOn(EventNumber);
+    //G4int EventNumber = 10;
+    //theRunManager->BeamOn(EventNumber);
 
     // User Interface
     G4UImanager* theUIManager = G4UImanager::GetUIpointer();
@@ -114,7 +114,9 @@ int main(int argc, char** argv) {
         #ifdef G4UI_USE
             G4UIExecutive *theUI = new G4UIExecutive(argc, argv);
             #ifdef G4VIS_USE
-                theUIManager->ApplyCommand("/control/execute vis.mac");
+                theUIManager->ApplyCommand("/control/execute init_vis.mac");
+            #else
+                theUImanager->ApplyCommand("/control/execute init.mac");
             #endif
             theUI->SessionStart();
             delete theUI;
