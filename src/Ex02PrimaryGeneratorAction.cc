@@ -18,7 +18,7 @@ Ex02PrimaryGeneratorAction::Ex02PrimaryGeneratorAction() {
     G4String particleName;
     particleGun->SetParticleDefinition(particleTable->FindParticle(particleName="mu-"));
     //particleGun->SetParticleEnergy(100.0*GeV);
-    particleGun->SetParticlePosition(G4ThreeVector(-0.0*m, 0.0, 0.0));
+    particleGun->SetParticlePosition(G4ThreeVector(-1.0*m, 0.0, 0.0));
 }
 
 Ex02PrimaryGeneratorAction::~Ex02PrimaryGeneratorAction() {
