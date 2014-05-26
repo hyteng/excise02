@@ -50,14 +50,15 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
         G4ThreeVector LocalHitPosition = ROhist->GetHistory()->GetTopTransform().TransformPoint(GlobalHitPosition);
         G4LogicalVolume* TrakerLayerLV = ROPV->GetLogicalVolume();
         G4int stripPVNumber = -1;
-        double residual_tmp = 100.0*cm;
+        double residual_tmp = 1000.0*m;
         for(G4int i=0; i < TrakerLayerLV->GetNoDaughters(); i++) {
             G4VPhysicalVolume* StripPV = TrakerLayerLV->GetDaughter(i);
             G4int stripPVN = StripPV->GetCopyNo();
             G4ThreeVector stripLocalPos = StripPV->GetTranslation();
-            if((stripLocalPos-LocalHitPosition).z() < residual_tmp) {
+            //G4cout << "Strip: " << stripPVN << ", residual: " << (stripLocalPos-LocalHitPosition).z() << ", last: " << residual_tmp << G4endl;
+            if(fabs((stripLocalPos-LocalHitPosition).z()) < residual_tmp) {
                 stripPVNumber = stripPVN;
-                residual_tmp = (stripLocalPos-LocalHitPosition).z();
+                residual_tmp = fabs((stripLocalPos-LocalHitPosition).z());
             }
         }
 
