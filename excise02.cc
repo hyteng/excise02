@@ -14,7 +14,6 @@
 
 #include "Ex02DetectorConstruction.hh"
 #include "Ex02PhysicsList.hh"
-//#include "G4VModularPhysicsList.hh"
 #include "QGSP_BERT.hh"
 #include "Ex02PrimaryGeneratorAction.hh"
 #include "Ex02RunAction.hh"
@@ -26,7 +25,7 @@
 
 #include "G4StepLimiterPhysics.hh"
 
-//#include "G4GlobalFastSimulationManager.hh"
+#include "G4GlobalFastSimulationManager.hh"
 
 #define G4VIS_USE 0
 
@@ -99,7 +98,7 @@ int main(int argc, char** argv) {
     theVisManager->Initialize();
     #endif
 
-    G4int EventNumber = 20;
+    G4int EventNumber = 10;
     theRunManager->BeamOn(EventNumber);
 
     // User Interface

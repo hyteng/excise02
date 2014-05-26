@@ -70,7 +70,6 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     experimentalHall_phys = new G4PVPlacement(0, G4ThreeVector(), experimentalHall_log, "expHall", 0, false, 0);
 
     //------------------------------ a solenoid block
-
     G4double part_x = 50.0*cm;
     G4double part_y = 100.0*cm;
     G4double part_z = 100.0*cm;
@@ -125,6 +124,7 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName, StripN);
     trackerRO->BuildROGeometry();
     trackerSD->SetROgeometry(trackerRO);
+
     //------------------ Parameterisation Models --------------------------
     
     G4Region* trackerRegion = new G4Region("tracker_region");

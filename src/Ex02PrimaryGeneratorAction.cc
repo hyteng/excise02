@@ -27,16 +27,16 @@ Ex02PrimaryGeneratorAction::~Ex02PrimaryGeneratorAction() {
 
 void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
-    G4int i = anEvent->GetEventID()%5;
+    G4int i = anEvent->GetEventID()%10;
     G4ThreeVector v0(1.0,0.0,0.0);
     double angle = CLHEP::RandFlat::shoot(-0.25, 0.25);
-    angle = -0.25;
+    //angle = 0.25;
     G4ThreeVector v = v0.rotateY(angle);
     G4cout << "angle: " << angle << ", v: " << v << G4endl;
     double P;
     switch(i) {
         case 0:
-            P = 10.0;
+            P = 12.5;
             break;
         case 1:
             P = 20.0;
@@ -48,7 +48,22 @@ void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
             P = 40.0;
             break;
         case 4:
-            P = 50.0;
+            P = 60.0;
+            break;
+        case 5:
+            P = 80.0;
+            break;
+        case 6:
+            P = 100.0;
+            break;
+        case 7:
+            P = 150.0;
+            break;
+        case 8:
+            P = 200.0;
+            break;
+        case 9:
+            P = 400.0;
             break;
     }
     //P = 10.0;

@@ -72,8 +72,10 @@
 # Re-establish auto refreshing and verbosity:
 /vis/viewer/set/autoRefresh true
 /vis/verbose warnings
+/hits/activate /Ex02/TrackerSD
+/tracking/verbose 2
 #
 # For file-based drivers, use this to create an empty detector view:
 #/vis/viewer/flush
 #
-/run/beamOn 20
+/run/beamOn 10

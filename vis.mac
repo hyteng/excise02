@@ -26,6 +26,7 @@
 # trajectories are established:
 /vis/viewer/set/autoRefresh false
 /vis/verbose errors
+/tracking/verbose 2
 #
 # Draw geometry:
 /vis/drawVolume
