@@ -22,6 +22,8 @@
 #include "G4ios.hh"
 
 Ex02DetectorConstruction::Ex02DetectorConstruction() : experimentalHall_log(0), trackerBlock_log(0), trackerLayer_log(0), experimentalHall_phys(0), trackerBlock_phys(0), trackerLayer_phys(0) {
+    efficiency = 100.0;
+    addNoise = false;
     //fpMagField = new Ex02MagneticField();
     //fpMagField->SetMagFieldValue(G4ThreeVector(0., 0.05, 0.));
 }
@@ -116,7 +118,7 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     //------------------------------ SD 
     G4SDManager* SDman = G4SDManager::GetSDMpointer();
     G4String trackerSDName = "Ex02/TrackerSD";
-    Ex02TrackerSD* trackerSD = new Ex02TrackerSD(trackerSDName);
+    Ex02TrackerSD* trackerSD = new Ex02TrackerSD(trackerSDName, efficiency, addNoise);
     SDman->AddNewDetector(trackerSD);
     trackerLayer_log->SetSensitiveDetector(trackerSD);
 

@@ -2,4 +2,4 @@
 *~
 *.swp
 project.vim
-rundata.txt
+rundata*.txt

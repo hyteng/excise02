@@ -66,7 +66,7 @@ void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
             P = 400.0;
             break;
     }
-    //P = 10.0;
+    P = 400.0*CLHEP::RandFlat::shoot(0.05, 1.);
     //G4cout << "Event " << anEvent->GetEventID() << "th: P=" << P << "GeV" << G4endl; 
     particleGun->SetParticleEnergy(P*GeV);
     particleGun->SetParticleMomentumDirection(v);

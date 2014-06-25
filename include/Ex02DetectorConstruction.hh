@@ -33,7 +33,8 @@ class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
 
         inline void SetROStripNumber(G4int n) {StripN = n;};
         inline G4int GetROStripNumber() {return StripN;};
-
+        inline void SetNoise(G4bool noise) {addNoise = noise;};
+        inline void SetEfficiency(G4double eff) {efficiency = eff;};
     private:
         void SetMagField(G4double);
 
@@ -57,6 +58,8 @@ class Ex02DetectorConstruction : public G4VUserDetectorConstruction {
         G4Element* N;
         
         G4int StripN;
+        G4double efficiency;
+        G4bool addNoise;
 };
 
 #endif

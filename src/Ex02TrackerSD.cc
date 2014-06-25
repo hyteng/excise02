@@ -1,4 +1,3 @@
-
 #include "Ex02TrackerSD.hh"
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
@@ -7,10 +6,15 @@
 #include "G4ios.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4Box.hh"
+#include "Randomize.hh"
 
-Ex02TrackerSD::Ex02TrackerSD(G4String name) : G4VSensitiveDetector(name) {
+#define noiseTH 0.9
+
+Ex02TrackerSD::Ex02TrackerSD(G4String name, G4double eff=100.0, G4bool noise=false) : G4VSensitiveDetector(name) {
     G4String HCname;
     collectionName.insert(HCname="trackerCollection");
+    efficiency = eff;
+    addNoise = noise;
 }
 
 
@@ -28,7 +32,7 @@ void Ex02TrackerSD::Initialize(G4HCofThisEvent* HCE) {
 
     G4cout << "SD Initialize: " << HCID << G4endl;
     for(int i=0;i<5;i++)
-        for(int j=0;j<40;j++)
+        for(int j=0;j<400;j++)
             tracker[i][j] = -1;
 }
 
@@ -51,7 +55,8 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
         G4LogicalVolume* TrakerLayerLV = ROPV->GetLogicalVolume();
         G4int stripPVNumber = -1;
         double residual_tmp = 1000.0*m;
-        for(G4int i=0; i < TrakerLayerLV->GetNoDaughters(); i++) {
+        int stripN = TrakerLayerLV->GetNoDaughters();
+        for(G4int i=0; i < stripN; i++) {
             G4VPhysicalVolume* StripPV = TrakerLayerLV->GetDaughter(i);
             G4int stripPVN = StripPV->GetCopyNo();
             G4ThreeVector stripLocalPos = StripPV->GetTranslation();
@@ -61,8 +66,25 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
                 residual_tmp = fabs((stripLocalPos-LocalHitPosition).z());
             }
         }
+        G4cout << "stripPVNumber: " << stripPVNumber << G4endl;
+
+        if(efficiency < 100.0) {
+            double randEff = CLHEP::RandFlat::shoot(0.0, 100.0);
+            if(randEff > efficiency)
+                stripPVNumber = -1;
+        }
 
         if(stripPVNumber != -1) {
+            
+            if(addNoise) {
+                double randNoise = CLHEP::RandFlat::shoot(0.0, 1.0);
+                if(randNoise > noiseTH) {
+                    stripPVNumber = (int)CLHEP::RandFlat::shoot(0.0, (double)stripN);
+                    if(stripPVNumber == stripN)
+                        stripPVNumber = 0;
+                }
+            }
+
             if(tracker[ROPVNumber][stripPVNumber] == -1) {
                 Ex02TrackerHit* newHit = new Ex02TrackerHit();
                 newHit->SetTrackID(aStep->GetTrack()->GetTrackID());
@@ -79,7 +101,7 @@ G4bool Ex02TrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
                 newHit->SetError(localError);
 
                 G4ThreeVector P = aStep->GetTrack()->GetMomentum();
-                newHit->SetPt(P.mag());
+                newHit->SetPt(P.mag()/GeV);
                 tracker[ROPVNumber][stripPVNumber] = trackerCollection->insert(newHit) - 1;
                 G4cout << "stripPVNumber: " << stripPVNumber << ", StripLocalPosition: " << StripLocalPosition << ", GlobalDigiPosition: " << GlobalDigiPosition << ", localError: " << localError << G4endl;
             }
@@ -105,7 +127,7 @@ void Ex02TrackerSD::EndOfEvent(G4HCofThisEvent* HCE) {
     HCE->AddHitsCollection(HCID, trackerCollection); 
 
     for(int i=0;i<5;i++)
-        for(int j=0;j<40;j++)
+        for(int j=0;j<400;j++)
             tracker[i][j] = -1;
 
 }

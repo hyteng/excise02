@@ -72,9 +72,9 @@ void Ex02SimpleSolenoidPart::GetFieldValue(const G4double* point, G4double* fiel
     EInside posSort = GetSide(localPos);
     switch(posSort) {
         case kOutside:
-            localFieldX*=-1.0;
-            localFieldY*=-1.0;
-            localFieldZ*=-1.0;
+            localFieldX*=-0.5;
+            localFieldY*=-0.5;
+            localFieldZ*=-0.5;
             break;
         case kSurface:
             localFieldX=localFieldY=localFieldZ=0.0;
