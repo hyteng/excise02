@@ -28,6 +28,9 @@
 
 //#include "G4GlobalFastSimulationManager.hh"
 
+#include "G4GDMLParser.hh"
+#include "G4VPhysicalVolume.hh"
+
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -82,6 +85,12 @@ int main(int argc, char** argv) {
     theRunManager->SetUserAction(theSteppingAction);
 
     theRunManager->Initialize();
+
+    // paste to GDML file
+    G4VPhysicalVolume* W = G4TransportationManager::GetTransportationManager()->GetNavigatorForTracking()->GetWorldVolume();
+    G4GDMLParser parser;
+    parser.Write("output.gdml", W);
+
 
 #ifdef G4VIS_USE
     G4VisManager* theVisManager = new G4VisExecutive;

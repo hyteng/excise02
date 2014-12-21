@@ -14,7 +14,6 @@
 #include "Ex02MagneticField.hh"
 
 #include "G4VUserDetectorConstruction.hh"
-
 #include "globals.hh"
 
 class G4VPhysicalVolume;

@@ -29,7 +29,7 @@ void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
   G4int i = anEvent->GetEventID() % 3;
   G4ThreeVector v(1.0,0.0,0.0);
-  /*
+  
   switch(i) {
     case 0:
       break;
@@ -40,7 +40,7 @@ void Ex02PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
       v.setZ(0.1);
       break;
   }
-  */
+  
   particleGun->SetParticleMomentumDirection(v);
   particleGun->GeneratePrimaryVertex(anEvent);
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+  <define/>
+
+  <materials>
+    <isotope N="12" Z="6" name="C120x8ba0c0">
+      <atom unit="g/mole" value="12"/>
+    </isotope>
+    <isotope N="13" Z="6" name="C130x8ba160">
+      <atom unit="g/mole" value="13.0034"/>
+    </isotope>
+    <element name="Carbon0x8b9c10">
+      <fraction n="0.9893" ref="C120x8ba0c0"/>
+      <fraction n="0.0107" ref="C130x8ba160"/>
+    </element>
+    <isotope N="1" Z="1" name="H10x8b9d70">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x8b9e00">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="Hydrogen0x88f400">
+      <fraction n="0.999885" ref="H10x8b9d70"/>
+      <fraction n="0.000115" ref="H20x8b9e00"/>
+    </element>
+    <material name="Scintillator0x8c7840" state="solid">
+      <MEE unit="eV" value="64.6844741120544"/>
+      <D unit="g/cm3" value="1.032"/>
+      <fraction n="0.914544377696929" ref="Carbon0x8b9c10"/>
+      <fraction n="0.0854556223030713" ref="Hydrogen0x88f400"/>
+    </material>
+    <material Z="13" name="Aluminum0x8c4ea0" state="solid">
+      <MEE unit="eV" value="166"/>
+      <D unit="g/cm3" value="2.7"/>
+      <atom unit="g/mole" value="26.98"/>
+    </material>
+    <isotope N="36" Z="18" name="360x8bacd0">
+      <atom unit="g/mole" value="35.9675"/>
+    </isotope>
+    <isotope N="38" Z="18" name="380x8bad40">
+      <atom unit="g/mole" value="37.9627"/>
+    </isotope>
+    <isotope N="40" Z="18" name="400x8badb0">
+      <atom unit="g/mole" value="39.9624"/>
+    </isotope>
+    <element name="ArgonGas0x8ba930">
+      <fraction n="0.003365" ref="360x8bacd0"/>
+      <fraction n="0.000632" ref="380x8bad40"/>
+      <fraction n="0.996003" ref="400x8badb0"/>
+    </element>
+    <material name="ArgonGas0x8ba5c0" state="gas">
+      <MEE unit="eV" value="188"/>
+      <D unit="g/cm3" value="0.001782"/>
+      <fraction n="1" ref="ArgonGas0x8ba930"/>
+    </material>
+  </materials>
+
+  <solids>
+    <box lunit="mm" name="trackerLayer_box0x8d2df0" x="20" y="2000" z="2000"/>
+    <box lunit="mm" name="trackerBlock_box0x8d2c20" x="1000" y="2000" z="2000"/>
+    <box lunit="mm" name="expHall_box0x8c7b70" x="5000" y="2000" z="2000"/>
+  </solids>
+
+  <structure>
+    <volume name="trackerLayer_log0x8d2e90">
+      <materialref ref="Scintillator0x8c7840"/>
+      <solidref ref="trackerLayer_box0x8d2df0"/>
+    </volume>
+    <volume name="trackerBlock_log0x8d2cc0">
+      <materialref ref="Aluminum0x8c4ea0"/>
+      <solidref ref="trackerBlock_box0x8d2c20"/>
+      <physvol name="trackerLayer0x8d2fb0">
+        <volumeref ref="trackerLayer_log0x8d2e90"/>
+        <position name="trackerLayer0x8d2fb0_pos" unit="mm" x="-400" y="0" z="0"/>
+      </physvol>
+      <physvol name="trackerLayer0x8d3020">
+        <volumeref ref="trackerLayer_log0x8d2e90"/>
+        <position name="trackerLayer0x8d3020_pos" unit="mm" x="-200" y="0" z="0"/>
+      </physvol>
+      <physvol name="trackerLayer0x8d3090">
+        <volumeref ref="trackerLayer_log0x8d2e90"/>
+      </physvol>
+      <physvol name="trackerLayer0x8d3130">
+        <volumeref ref="trackerLayer_log0x8d2e90"/>
+        <position name="trackerLayer0x8d3130_pos" unit="mm" x="200" y="0" z="0"/>
+      </physvol>
+      <physvol name="trackerLayer0x8d31a0">
+        <volumeref ref="trackerLayer_log0x8d2e90"/>
+        <position name="trackerLayer0x8d31a0_pos" unit="mm" x="400" y="0" z="0"/>
+      </physvol>
+    </volume>
+    <volume name="expHall_log0x8c7c00">
+      <materialref ref="ArgonGas0x8ba5c0"/>
+      <solidref ref="expHall_box0x8c7b70"/>
+      <physvol name="trackerBlock0x8d2d70">
+        <volumeref ref="trackerBlock_log0x8d2cc0"/>
+        <position name="trackerBlock0x8d2d70_pos" unit="mm" x="2000" y="0" z="0"/>
+      </physvol>
+    </volume>
+  </structure>
+
+  <setup name="Default" version="1.0">
+    <world ref="expHall_log0x8c7c00"/>
+  </setup>
+
+</gdml>
