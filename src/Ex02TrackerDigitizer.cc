@@ -31,18 +31,23 @@ void Ex02TrackerDigitizer::Digitize() {
     
     G4int n_hit = THC->entries();
     for(G4int i=0;i<n_hit;i++) {
+        G4int TrackerId = (*THC)[i]->GetTrackID();
         G4int StripNb = (*THC)[i]->GetStrip();
         G4int ChamberNb = (*THC)[i]->GetChamberNb();
         G4ThreeVector simPos = (*THC)[i]->GetHitPos();
         G4ThreeVector Pos = (*THC)[i]->GetDigiPos();
         G4ThreeVector error = (*THC)[i]->GetError();
+        G4double pt = (*THC)[i]->GetPt();
         
         Ex02TrackerDigi* Digi = new Ex02TrackerDigi();
+        Digi->SetRun(RunNumber);
+        Digi->SetEvent(EventNumber);
         Digi->SetDetector(ChamberNb);
         Digi->SetStrip(StripNb);
         Digi->SetPosition(Pos);
         Digi->SetSimPosition(simPos);
         Digi->SetError(error);
+        Digi->SetPt(pt);
 
         DigitsCollection->insert(Digi);
     }

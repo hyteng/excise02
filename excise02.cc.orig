@@ -14,7 +14,6 @@
 
 #include "Ex02DetectorConstruction.hh"
 #include "Ex02PhysicsList.hh"
-//#include "G4VModularPhysicsList.hh"
 #include "QGSP_BERT.hh"
 #include "Ex02PrimaryGeneratorAction.hh"
 #include "Ex02RunAction.hh"
@@ -26,12 +25,15 @@
 
 #include "G4StepLimiterPhysics.hh"
 
-//#include "G4GlobalFastSimulationManager.hh"
+#include "G4GlobalFastSimulationManager.hh"
 
+<<<<<<< HEAD
 #include "G4GDMLParser.hh"
 #include "G4VPhysicalVolume.hh"
 
+=======
 #define G4VIS_USE 0
+>>>>>>> 6af284e0558e3ef29ce923baf50d5d24e7ef5ee2
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -99,13 +101,17 @@ int main(int argc, char** argv) {
 
     theRunManager->Initialize();
 
+<<<<<<< HEAD
     // paste to GDML file
     G4VPhysicalVolume* W = G4TransportationManager::GetTransportationManager()->GetNavigatorForTracking()->GetWorldVolume();
     G4GDMLParser parser;
     parser.Write("output.gdml", W);
 
 
-	 #ifdef G4VIS_USE
+#ifdef G4VIS_USE
+=======
+    #ifdef G4VIS_USE
+>>>>>>> 6af284e0558e3ef29ce923baf50d5d24e7ef5ee2
     G4VisManager* theVisManager = new G4VisExecutive;
     theVisManager->Initialize();
     #endif
@@ -138,9 +144,9 @@ int main(int argc, char** argv) {
     outFile.close();
     #endif
 
-#ifdef G4VIS_USE
+    #ifdef G4VIS_USE
     delete theVisManager;   
-#endif 
+    #endif 
 
     //Job termination
     delete verbosity;

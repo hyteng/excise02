@@ -11,7 +11,7 @@ class G4TouchableHistory;
 
 class Ex02TrackerSD : public G4VSensitiveDetector {
   public:
-      Ex02TrackerSD(G4String);
+      Ex02TrackerSD(G4String, G4double, G4bool);
      ~Ex02TrackerSD();
 
       void Initialize(G4HCofThisEvent*);
@@ -20,8 +20,9 @@ class Ex02TrackerSD : public G4VSensitiveDetector {
 
   private:
       Ex02TrackerHitsCollection* trackerCollection;
-      G4int tracker[5][40];
-
+      G4int tracker[5][400];
+      G4double efficiency;
+      G4bool addNoise;
 };
 
 #endif

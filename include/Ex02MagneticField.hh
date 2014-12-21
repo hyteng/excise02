@@ -17,7 +17,7 @@ class Ex02MagneticField: public G4UniformMagField {
         void SetMagFieldValue(G4double fieldValue);
         void SetMagFieldValue(G4ThreeVector fieldVector);
 
-        G4ThreeVector GetConstantFieldValue();
+        //G4ThreeVector GetConstantFieldValue();
 
     protected:
 

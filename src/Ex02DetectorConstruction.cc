@@ -22,12 +22,15 @@
 #include "G4ios.hh"
 
 Ex02DetectorConstruction::Ex02DetectorConstruction() : experimentalHall_log(0), trackerBlock_log(0), trackerLayer_log(0), experimentalHall_phys(0), trackerBlock_phys(0), trackerLayer_phys(0) {
-        fpMagField = new Ex02MagneticField();
-        fpMagField->SetMagFieldValue(G4ThreeVector(0., 0.01, 0.));
+    efficiency = 100.0;
+    addNoise = false;
+    //fpMagField = new Ex02MagneticField();
+    //fpMagField->SetMagFieldValue(G4ThreeVector(0., 0.05, 0.));
 }
 
 Ex02DetectorConstruction::~Ex02DetectorConstruction() {
-    delete fpMagField;
+    //delete fpMagField;
+    delete fpSolenoidPart;
     delete fStepLimit;
 }
 
@@ -61,12 +64,26 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     //------------------------------ experimental hall (world volume)
     //------------------------------ beam line along x axis
 
-    G4double expHall_x = 2.5*m;
+    G4double expHall_x = 1.0*m;
     G4double expHall_y = 1.0*m;
     G4double expHall_z = 1.0*m;
     G4Box* experimentalHall_box = new G4Box("expHall_box", expHall_x, expHall_y, expHall_z);
     experimentalHall_log = new G4LogicalVolume(experimentalHall_box, Ar, "expHall_log", 0, 0, 0);
     experimentalHall_phys = new G4PVPlacement(0, G4ThreeVector(), experimentalHall_log, "expHall", 0, false, 0);
+
+    //------------------------------ a solenoid block
+    G4double part_x = 50.0*cm;
+    G4double part_y = 100.0*cm;
+    G4double part_z = 100.0*cm;
+    G4Box* solenoidPart_box = new G4Box("solenoidPart_box", part_x, part_y, part_z);
+    solenoidPart_log = new G4LogicalVolume(solenoidPart_box, Ar, "solenoidPart_log", 0, 0, 0);
+    G4double partPos_x = -0.5*m;
+    G4double partPos_y = 0.0*m;
+    G4double partPos_z = 0.0*m;
+    solenoidPart_phys = new G4PVPlacement(0, G4ThreeVector(partPos_x, partPos_y, partPos_z), solenoidPart_log, "solenoidPart", experimentalHall_log, false, 0);
+
+    //------------------------------ solenoid part B field
+    fpSolenoidPart = new Ex02SimpleSolenoidPart(G4ThreeVector(0,-0.05,0), solenoidPart_log, G4ThreeVector(partPos_x, partPos_y, partPos_z));
 
     //------------------------------ a tracker block
 
@@ -75,7 +92,7 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     G4double block_z = 100.0*cm;
     G4Box* trackerBlock_box = new G4Box("trackerBlock_box", block_x, block_y, block_z);
     trackerBlock_log = new G4LogicalVolume(trackerBlock_box, Al, "trackerBlock_log", 0, 0, 0);
-    G4double blockPos_x = 2.0*m;
+    G4double blockPos_x = 0.5*m;
     G4double blockPos_y = 0.0*m;
     G4double blockPos_z = 0.0*m;
     trackerBlock_phys = new G4PVPlacement(0, G4ThreeVector(blockPos_x, blockPos_y, blockPos_z), trackerBlock_log, "trackerBlock", experimentalHall_log, false, 0);
@@ -101,14 +118,15 @@ G4VPhysicalVolume* Ex02DetectorConstruction::Construct() {
     //------------------------------ SD 
     G4SDManager* SDman = G4SDManager::GetSDMpointer();
     G4String trackerSDName = "Ex02/TrackerSD";
-    Ex02TrackerSD* trackerSD = new Ex02TrackerSD(trackerSDName);
+    Ex02TrackerSD* trackerSD = new Ex02TrackerSD(trackerSDName, efficiency, addNoise);
     SDman->AddNewDetector(trackerSD);
     trackerLayer_log->SetSensitiveDetector(trackerSD);
 
     G4String ROgeometryName = "TrackerROGeometry";
-    G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName);
+    G4VReadOutGeometry* trackerRO = new Ex02TrackerROGeometry(ROgeometryName, StripN);
     trackerRO->BuildROGeometry();
     trackerSD->SetROgeometry(trackerRO);
+
     //------------------ Parameterisation Models --------------------------
     
     G4Region* trackerRegion = new G4Region("tracker_region");

@@ -11,10 +11,16 @@ class Ex02TrackerDigitizer : public G4VDigitizerModule {
         Ex02TrackerDigitizer(G4String name);
         ~Ex02TrackerDigitizer();
     
+        inline void SetRunNumber(G4int n) {RunNumber = n;};
+        inline G4int GetRunNumber() {return RunNumber;};
+        inline void SetEventNumber(G4int n) {EventNumber = n;};
+        inline G4int GetEventNumber() {return EventNumber;};
         void Digitize();
 
     private:
         Ex02TrackerDigitsCollection*  DigitsCollection;
+        G4int EventNumber;
+        G4int RunNumber;
 };
 
 #endif
